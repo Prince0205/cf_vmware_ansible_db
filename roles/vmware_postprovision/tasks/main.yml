@@ -15,11 +15,13 @@
   retries: "{{ max_retries }}"
   delay: "{{ retry_interval }}"
   with_items: "{{ vmware_created_vms.results }}"
+  ignore_errors: true
 
 - name: Log lookup_vms_output.results
   debug:
     var: lookup_vms_output.results
   when: verbose
+  ignore_errors: true
 
 - name: Set the svc_url
   set_fact:
