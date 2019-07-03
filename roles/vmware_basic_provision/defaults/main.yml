@@ -3,9 +3,12 @@
 # http://docs.ansible.com/ansible/latest/vmware_guest_module.html
 
 # vcenter parameters
-hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
-username: "{{ lookup('env', 'VMWARE_USER') }}"
-password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+#hostname: "{{ lookup('env', 'VMWARE_HOST') }}"
+#username: "{{ lookup('env', 'VMWARE_USER') }}"
+#password: "{{ lookup('env', 'VMWARE_PASSWORD') }}"
+hostname: "{{ hostname }}"
+username: "{{ username }}"
+password: "{{ password }}"
 validate_certs: false
 template:
 datacenter:
