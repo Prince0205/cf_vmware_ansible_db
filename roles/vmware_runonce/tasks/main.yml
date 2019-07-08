@@ -8,3 +8,30 @@
     var: ssh_output
 
 # Add your own plays here
+- name: Install mysql
+  yum:
+    name: mariadb-server
+    state: present
+- name: Install Python MySQL libraries
+  yum: pkg=MySQL-python state=latest
+- name: start mysql server and enable it on reboot
+  service: 
+    name: mariadb 
+    state: started 
+    enabled: true  
+- name: update mysql root password for all root accounts
+  mysql_user:
+    name: root
+    host: vmware_host
+    password: "{{ mysql_root_password }}"
+    login_user: root
+    login_password: "{{ mysql_root_password }}"
+    check_implicit_admin: yes
+    priv: "*.*:ALL,GRANT"
+  #with_items: "{{ vmware_created_vms.results }}"
+- name: Create a New Test DB called MyNewDB
+  mysql_db: 
+    name: {{ mysql_dbname }} 
+    state: present 
+    login_user: root 
+    login_password: {{ mysql_root_password }}
