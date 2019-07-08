@@ -31,7 +31,7 @@
   #with_items: "{{ vmware_created_vms.results }}"
 - name: Create a New Test DB called MyNewDB
   mysql_db: 
-    name: {{ database_name }} 
+    name: "{{ database_name }}"
     state: present 
     login_user: root 
-    login_password: {{ mysql_root_password }}
+    login_password: "{{ mysql_root_password }}"
