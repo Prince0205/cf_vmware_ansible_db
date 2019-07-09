@@ -29,7 +29,17 @@
     check_implicit_admin: yes
     priv: "*.*:ALL,GRANT"
   #with_items: "{{ vmware_created_vms.results }}"
-- name: Create a New Test DB called MyNewDB
+- name: Copy the root credentials as .my.cnf file
+  #template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
+  blockinfile:
+    path: ~/.my.cnf
+    state: present
+    create: true
+    block: |
+      [client]
+      user = root
+      password = "{{ mysql_root_password }}"
+- name: Create a New Test DB 
   mysql_db: 
     name: "{{ database_name }}"
     state: present 
